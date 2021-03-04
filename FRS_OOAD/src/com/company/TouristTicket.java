@@ -11,6 +11,8 @@ public class TouristTicket {
     private final String DESTINATION_ARRIVAL_DATE_AND_TIME;
     private final String SEAT_NUMBER;
     private final float TICKET_PRICE;
+    private final Flight flightDetails;
+    private final Passenger passengerDetails;
 
     private enum TicketStatus {
         CONFIRMED, CANCELLED
@@ -20,7 +22,9 @@ public class TouristTicket {
     private String hotelAddress;
     private String[] selectedTouristLocations;
 
-    public TouristTicket(String PNR, String DEPARTURE_LOCATION, String DESTINATION_LOCATION, String DEPARTURE_DATE_AND_TIME, String DESTINATION_ARRIVAL_DATE_AND_TIME, String SEAT_NUMBER, float TICKET_PRICE, String hotelAddress, String[] selectedTouristLocations) {
+    public TouristTicket(String PNR, String DEPARTURE_LOCATION, String DESTINATION_LOCATION, String DEPARTURE_DATE_AND_TIME,
+                         String DESTINATION_ARRIVAL_DATE_AND_TIME, String SEAT_NUMBER, float TICKET_PRICE, String hotelAddress,
+                         String[] selectedTouristLocations,Flight flightDetails,Passenger passengerDetails) {
         this.PNR = PNR;
         this.DEPARTURE_LOCATION = DEPARTURE_LOCATION;
         this.DESTINATION_LOCATION = DESTINATION_LOCATION;
@@ -30,7 +34,10 @@ public class TouristTicket {
         this.TICKET_PRICE = TICKET_PRICE;
         this.hotelAddress = hotelAddress;
         this.status = TicketStatus.CONFIRMED;
+        this.flightDetails = flightDetails;
+        this.passengerDetails = passengerDetails;
         this.selectedTouristLocations = selectedTouristLocations;
+        this.flightDetails.updateAvailableSeats();
     }
 
     public String getPNR() {
@@ -102,6 +109,13 @@ public class TouristTicket {
         }
     }
 
+    public String getFlightDetails() {
+        return this.flightDetails.getFlightDetails();
+    }
+
+    public String getPassengerDetails() {
+        return this.passengerDetails.getPassengerDetails();
+    }
     public String getSelectedTouristLocations() {
         return String.join(", ",this.selectedTouristLocations);
     }
@@ -116,6 +130,7 @@ public class TouristTicket {
 
     public void cancelTicket() {
         this.status = TicketStatus.CANCELLED;
+        this.flightDetails.decrementBookedSeats();
     }
 
     public void journeyDuration() { //code reference geeksforgeeks

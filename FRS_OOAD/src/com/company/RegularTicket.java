@@ -13,6 +13,9 @@ public class RegularTicket {
     private final String SEAT_NUMBER;
     private final float TICKET_PRICE;
 
+    private final Flight flightDetails;
+    private final Passenger passengerDetails;
+
     private enum TicketStatus {
         CONFIRMED, CANCELLED
     }
@@ -22,7 +25,7 @@ public class RegularTicket {
 
     public RegularTicket(String PNR, String DEPARTURE_LOCATION, String DESTINATION_LOCATION,
                          String DEPARTURE_DATE_AND_TIME, String DESTINATION_ARRIVAL_DATE_AND_TIME, String SEAT_NUMBER,
-                         float TICKET_PRICE, String specialServices) {
+                         float TICKET_PRICE, String specialServices,Flight flightDetails,Passenger passengerDetails) {
         this.PNR = PNR;
         this.DEPARTURE_LOCATION = DEPARTURE_LOCATION;
         this.DESTINATION_LOCATION = DESTINATION_LOCATION;
@@ -31,8 +34,18 @@ public class RegularTicket {
         this.SEAT_NUMBER = SEAT_NUMBER;
         this.TICKET_PRICE = TICKET_PRICE;
         this.specialServices = specialServices;
+        this.flightDetails = flightDetails;
+        this.passengerDetails = passengerDetails;
         this.status = TicketStatus.CONFIRMED; //When a ticket object is initialized it is confirmed
+        this.flightDetails.updateAvailableSeats();
+    }
 
+    public String getFlightDetails() {
+        return this.flightDetails.getFlightDetails();
+    }
+
+    public String getPassengerDetails() {
+        return this.passengerDetails.getPassengerDetails();
     }
 
     public String getPNR() {
@@ -78,6 +91,7 @@ public class RegularTicket {
 
     public void cancelTicket() {
         this.status = TicketStatus.CANCELLED;
+        this.flightDetails.decrementBookedSeats();
     }
 
     public void journeyDuration() { //code reference geeksforgeeks

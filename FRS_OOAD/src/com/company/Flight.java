@@ -6,6 +6,10 @@ public class Flight {
     private final int TOTAL_CAPACITY;
     private int bookedSeats;
 
+    public void decrementBookedSeats() {
+        this.bookedSeats--;
+    }
+
     public Flight(String AIRLINE_COMPANY_NAME, int TOTAL_CAPACITY) {
         int random = (int) (Math.random() * 9999);
         if (random < 1000) {
