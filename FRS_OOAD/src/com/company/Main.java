@@ -69,5 +69,10 @@ public class Main {
         System.out.println(touristTicket.getTicketDetails());
         touristTicket.journeyDuration();
 
+
+        /* Other methods initial implementation has been done
+        but cant be used/printed now because the associations between classes has
+        not been established yet.
+         */
     }
 }
