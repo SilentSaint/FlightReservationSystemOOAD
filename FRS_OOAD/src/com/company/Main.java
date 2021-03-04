@@ -19,8 +19,8 @@ public class Main {
 
         RegularTicket regularTicket = new RegularTicket("AB7DE", "Bengaluru",
                 "Delhi", "03-03-2021 01:10:20",
-                "04-03-2021 02:20:40", "A8", 2209.50f,
-                "food, water, snacks",flightRegular,passenger);
+                "04-03-2021 02:20:40", "A8", 2209.50f,flightRegular
+                ,passenger, "food, water, snacks");
 
         TouristTicket touristTicket = new TouristTicket("A97DX", "Bengaluru",
                 "New York", "03-03-2021 01:10:20",
@@ -56,6 +56,9 @@ public class Main {
         System.out.println("Flight Details");
         System.out.println(touristTicket.getFlightDetails());
         System.out.println("\n");
+        touristTicket.removeTouristLocation("Taj Mahal"); //removed taj mahal
+        touristTicket.printSelectedTouristLocations();
+        touristTicket.addTouristLocation("Red fort"); //added redfort
         System.out.println("Ticket Details");
         System.out.println(touristTicket.getTicketDetails());
         System.out.println("\n");
